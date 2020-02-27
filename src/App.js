@@ -11,7 +11,8 @@ function App() {
         headers: {
           accept: "application/json",
           "content-type": "application/json",
-          authorization: "Basic " + process.env.REACT_APP_PM_KEY
+          authorization:
+            "Basic " + process.env.REACT_APP_PAYMONGO_BASE64_PUBLIC_KEY
         },
         body:
           '{"data":{"attributes":{"number":"4123450131000508","exp_month":12,"exp_year":25,"cvc":"111","billing":{"address":{"line1":"address","city":"Biñan","state":"Laguna","country":"PH","postal_code":"4024"},"name":"John","email":"johnmail@gmail.com","phone":"09988909890"}}}}'
