@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import paymongo from "./services/paymongo";
+
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+
+import Products from "./components/Products";
+import FooterNavigation from "./components/FooterNavigation";
+import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 
 const predefinedCreditCardData = {
   data: {
@@ -40,7 +49,26 @@ const predefinedAmount = (tokenId, tokenType) => {
   };
 };
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh"
+  },
+  main: {
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(2)
+  },
+  footer: {
+    height: 80,
+    marginTop: "auto",
+    backgroundColor: "#fff"
+  }
+}));
+
 function App() {
+  const [index, setIndex] = useState(0);
+
   const handlePayment = data => {
     paymongo
       .createToken(data)
@@ -64,13 +92,24 @@ function App() {
       });
   };
 
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <button onClick={() => handlePayment(predefinedCreditCardData)}>
-          Test createToken
-        </button>
-      </header>
+    <div className={classes.root}>
+      <CssBaseline />
+      {/* <button onClick={() => handlePayment(predefinedCreditCardData)}>
+        Test createToken
+      </button> */}
+
+      <Container component="main" className={classes.main} maxWidth="sm">
+        {index === 0 && <Products />}
+        {index === 1 && <Cart />}
+        {index === 2 && <Checkout />}
+      </Container>
+
+      <Container component="footer" className={classes.footer} maxWidth="sm">
+        <FooterNavigation onChange={setIndex} index={index} />
+      </Container>
     </div>
   );
 }
