@@ -25,17 +25,19 @@ const predefinedCreditCardData = {
   }
 };
 
-const predefinedAmount = {
-  data: {
-    attributes: {
-      amount: 100,
-      currency: "PHP",
-      source: {
-        id: "tokenid",
-        type: "tokentype"
+const predefinedAmount = (tokenId, tokenType) => {
+  return {
+    data: {
+      attributes: {
+        amount: 10000,
+        currency: "PHP",
+        source: {
+          id: tokenId,
+          type: tokenType
+        }
       }
     }
-  }
+  };
 };
 
 function App() {
@@ -45,8 +47,15 @@ function App() {
       .then(result => {
         const tokenId = result.data.id;
         const tokenType = result.data.type;
-        console.log(tokenId, tokenType);
-        // console.log(result);
+
+        paymongo
+          .createPayment(predefinedAmount(tokenId, tokenType))
+          .then(result => console.log(result))
+          .catch(error => {
+            const code = error.code;
+            const message = error.message;
+            console.log(code, message);
+          });
       })
       .catch(error => {
         const code = error.code;

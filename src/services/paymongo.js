@@ -2,32 +2,42 @@ import postData from "../helpers/postData";
 
 const paymongo = {};
 
-const errorObj = (code, message) => {
-  return { code, message };
+const errorObj = obj => {
+  return { code: obj.code, message: obj.detail };
 };
 
 paymongo.createToken = data => {
+  const postUrl = "https://api.paymongo.com/v1/tokens";
+
   return new Promise((resolve, reject) => {
     if (!data) {
       reject(errorObj("no_data", "No data provided"));
       return;
     }
 
-    const postUrl = "https://api.paymongo.com/v1/tokens";
-
     postData(postUrl, data, "public").then(result => {
-      if (result.status === "error") {
-        const error = result.data.errors[0];
-        reject(errorObj(error.code, error.detail));
-      }
+      if (result.status === "error") reject(errorObj(result.data.errors[0]));
 
       resolve(result.data);
     });
   });
 };
 
-paymongo.createPayment = token => {
-  return new Promise((resolve, reject) => {});
+paymongo.createPayment = data => {
+  const postUrl = "https://api.paymongo.com/v1/payments";
+
+  return new Promise((resolve, reject) => {
+    if (!data) {
+      reject(errorObj("no_token", "No data provided"));
+      return;
+    }
+
+    postData(postUrl, data, "secret").then(result => {
+      if (result.status === "error") reject(errorObj(result.data.errors[0]));
+
+      resolve(result.data);
+    });
+  });
 };
 
 export default paymongo;
