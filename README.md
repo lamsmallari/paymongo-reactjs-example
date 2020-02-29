@@ -3,8 +3,10 @@
 **Done**
 
 - Create Token
+- Create Payment
 
 **Todo**
 
-- Sample Form
-- Create Payment
+- Product List
+- Cart Page
+- Checkout Form
