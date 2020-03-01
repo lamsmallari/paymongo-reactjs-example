@@ -8,13 +8,11 @@ import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
 
 const useStyles = makeStyles({
   root: {
-    width: "100%",
-    height: "100%"
+    height: 80
   },
   buttons: {
-    maxWidth: "33%",
-    "& span": {
-      marginTop: 5
+    "& svg": {
+      marginBottom: 5
     }
   }
 });

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import "./App.css";
 import paymongo from "./services/paymongo";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider
+} from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import Products from "./components/Products";
@@ -49,6 +52,14 @@ const predefinedAmount = (tokenId, tokenType) => {
   };
 };
 
+const theme = createMuiTheme({
+  palette: {
+    background: {
+      default: "#e3e3e3"
+    }
+  }
+});
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
@@ -60,7 +71,6 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2)
   },
   footer: {
-    height: 80,
     marginTop: "auto",
     backgroundColor: "#fff"
   }
@@ -95,22 +105,24 @@ function App() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      {/* <button onClick={() => handlePayment(predefinedCreditCardData)}>
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <CssBaseline />
+        {/* <button onClick={() => handlePayment(predefinedCreditCardData)}>
         Test createToken
       </button> */}
 
-      <Container component="main" className={classes.main} maxWidth="sm">
-        {index === 0 && <Products />}
-        {index === 1 && <Cart />}
-        {index === 2 && <Checkout />}
-      </Container>
+        <Container component="main" className={classes.main} maxWidth="sm">
+          {index === 0 && <Products />}
+          {index === 1 && <Cart />}
+          {index === 2 && <Checkout />}
+        </Container>
 
-      <Container component="footer" className={classes.footer} maxWidth="sm">
-        <FooterNavigation onChange={setIndex} index={index} />
-      </Container>
-    </div>
+        <Container component="footer" className={classes.footer} maxWidth="sm">
+          <FooterNavigation onChange={setIndex} index={index} />
+        </Container>
+      </div>
+    </ThemeProvider>
   );
 }
 
