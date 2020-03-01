@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import paymongo from "./services/paymongo";
+import _ from "lodash";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {
@@ -78,6 +79,7 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const [index, setIndex] = useState(0);
+  const [cart, setCart] = useState([]);
 
   const handlePayment = data => {
     paymongo
@@ -102,6 +104,24 @@ function App() {
       });
   };
 
+  const handleAddToCart = product => {
+    const cartData = [...cart];
+    const existingDataIndex = _.findIndex(cartData, { id: product.id });
+
+    if (existingDataIndex >= 0) {
+      // 1. if product is already in cart, perform merge
+      cartData[existingDataIndex] = {
+        ...product,
+        quantity: cartData[existingDataIndex].quantity + 1
+      };
+      setCart(cartData);
+    } else {
+      // 2. if product is not in the cart, perform add
+      cartData.push({ ...product, quantity: 1 });
+      setCart(cartData);
+    }
+  };
+
   const classes = useStyles();
 
   return (
@@ -113,7 +133,7 @@ function App() {
       </button> */}
 
         <Container component="main" className={classes.main} maxWidth="sm">
-          {index === 0 && <Products />}
+          {index === 0 && <Products handleAddToCart={handleAddToCart} />}
           {index === 1 && <Cart />}
           {index === 2 && <Checkout />}
         </Container>

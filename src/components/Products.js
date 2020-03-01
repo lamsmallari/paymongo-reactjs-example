@@ -20,7 +20,7 @@ const productData = [
   }
 ];
 
-const Products = () => {
+const Products = ({ handleAddToCart }) => {
   const useStyles = makeStyles({
     title: {
       marginBottom: 25
@@ -39,9 +39,8 @@ const Products = () => {
         productData.map(product => (
           <ProductItem
             key={product.id}
-            id={product.id}
-            title={product.title}
-            details={product.details}
+            data={product}
+            handleAddToCart={handleAddToCart}
           />
         ))}
     </>

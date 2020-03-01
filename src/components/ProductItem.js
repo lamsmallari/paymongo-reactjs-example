@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -25,7 +24,7 @@ const useStyles = makeStyles({
   }
 });
 
-const ProductItem = ({ title, details, ...rest }) => {
+const ProductItem = ({ data, handleAddToCart, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -33,10 +32,10 @@ const ProductItem = ({ title, details, ...rest }) => {
       <Card className={classes.root}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {title}
+            {data.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {details}
+            {data.details}
           </Typography>
         </CardContent>
         <CardActions className={classes.actions}>
@@ -51,6 +50,7 @@ const ProductItem = ({ title, details, ...rest }) => {
               color="primary"
               variant="contained"
               disableElevation
+              onClick={() => handleAddToCart(data)}
             >
               Add to cart
             </Button>
