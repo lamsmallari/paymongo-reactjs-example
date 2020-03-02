@@ -3,10 +3,10 @@ import Typography from "@material-ui/core/Typography";
 import ProductItem from "./ProductItem";
 import { makeStyles } from "@material-ui/core/styles";
 
-const productData = [
+const productDummyData = [
   {
     id: "1",
-    title: "Product 1",
+    title: "Product Item",
     price: 5000,
     details:
       "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.",
@@ -14,7 +14,7 @@ const productData = [
   },
   {
     id: "2",
-    title: "Product 2",
+    title: "Product Item with a long name",
     price: 8000,
     details:
       "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.",
@@ -37,8 +37,8 @@ const Products = ({ handleAddToCart }) => {
         Products
       </Typography>
 
-      {productData &&
-        productData.map(product => (
+      {productDummyData &&
+        productDummyData.map(product => (
           <ProductItem
             key={product.id}
             data={product}
