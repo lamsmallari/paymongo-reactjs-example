@@ -8,7 +8,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -60,9 +59,6 @@ const ProductItem = ({ data, handleAddToCart, ...rest }) => {
               Add to cart
             </Button>
             <Box>
-              <IconButton aria-label="add to likes">
-                <ShareIcon />
-              </IconButton>
               <IconButton aria-label="add to likes">
                 <FavoriteIcon />
               </IconButton>
