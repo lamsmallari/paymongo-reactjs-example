@@ -5,6 +5,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import ShoppingCartRoundedIcon from "@material-ui/icons/ShoppingCartRounded";
 import StorefrontRoundedIcon from "@material-ui/icons/StorefrontRounded";
 import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
+import Badge from "@material-ui/core/Badge";
 
 const useStyles = makeStyles({
   root: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
   }
 });
 
-const FooterNavigation = ({ onChange, index }) => {
+const FooterNavigation = ({ onChange, index, cartCount }) => {
   const classes = useStyles();
 
   return (
@@ -37,7 +38,11 @@ const FooterNavigation = ({ onChange, index }) => {
       <BottomNavigationAction
         className={classes.buttons}
         label="Cart"
-        icon={<ShoppingCartRoundedIcon />}
+        icon={
+          <Badge color="secondary" badgeContent={cartCount}>
+            <ShoppingCartRoundedIcon />
+          </Badge>
+        }
       />
       <BottomNavigationAction
         className={classes.buttons}

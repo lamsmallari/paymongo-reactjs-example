@@ -139,7 +139,11 @@ function App() {
         </Container>
 
         <Container component="footer" className={classes.footer} maxWidth="sm">
-          <FooterNavigation onChange={setIndex} index={index} />
+          <FooterNavigation
+            onChange={setIndex}
+            index={index}
+            cartCount={cart.length}
+          />
         </Container>
       </div>
     </ThemeProvider>
