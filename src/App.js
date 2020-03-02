@@ -12,9 +12,9 @@ import {
 import Container from "@material-ui/core/Container";
 
 import Products from "./components/Products";
-import FooterNavigation from "./components/FooterNavigation";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
+import FooterNavigation from "./components/FooterNavigation";
 
 const theme = createMuiTheme({
   palette: {
@@ -87,14 +87,51 @@ function App() {
 
     if (existingDataIndex >= 0) {
       // 1. if product is already in cart, perform merge
+      const productQuantity = cartData[existingDataIndex].quantity + 1;
+      const subTotal = cartData[existingDataIndex].price * productQuantity;
+
       cartData[existingDataIndex] = {
         ...product,
-        quantity: cartData[existingDataIndex].quantity + 1
+        quantity: productQuantity,
+        subTotal: subTotal,
+        idx: existingDataIndex
       };
     } else {
       // 2. if product is not in the cart, perform add
-      cartData.push({ ...product, quantity: 1 });
+      cartData.push({
+        ...product,
+        quantity: 1,
+        subTotal: product.price,
+        idx: cartData.length
+      });
     }
+
+    setCart(cartData);
+  };
+
+  const handleCartQuantity = (itemIndex, operation) => {
+    const cartData = [...cart];
+
+    switch (operation) {
+      case "increment":
+        cartData[itemIndex].quantity++;
+        break;
+      case "decrement":
+        if (cartData[itemIndex].quantity > 1) {
+          cartData[itemIndex].quantity--;
+        }
+        break;
+      default:
+        break;
+    }
+
+    setCart(cartData);
+  };
+
+  const handRemoveFromCart = itemIndex => {
+    const cartData = [...cart];
+
+    cartData.splice(itemIndex, 1);
 
     setCart(cartData);
   };
@@ -111,7 +148,13 @@ function App() {
 
         <Container component="main" className={classes.main} maxWidth="sm">
           {index === 0 && <Products handleAddToCart={handleAddToCart} />}
-          {index === 1 && <Cart items={cart} />}
+          {index === 1 && (
+            <Cart
+              items={cart}
+              handleCartQuantity={handleCartQuantity}
+              handRemoveFromCart={handRemoveFromCart}
+            />
+          )}
           {index === 2 && <Checkout />}
         </Container>
 
