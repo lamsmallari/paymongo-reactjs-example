@@ -6,7 +6,7 @@ import Box from "@material-ui/core/Box";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 import green from "@material-ui/core/colors/green";
 
-const SimpleDialog = ({ dialogState, handleDialogClose, itemName }) => {
+const AddToCartDialog = ({ dialogState, handleDialogClose, itemName }) => {
   return (
     <Dialog
       open={dialogState}
@@ -38,4 +38,4 @@ const SimpleDialog = ({ dialogState, handleDialogClose, itemName }) => {
   );
 };
 
-export default SimpleDialog;
+export default AddToCartDialog;

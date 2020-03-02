@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import dummyData from "../dummyData";
 import ProductItem from "./ProductItem";
-import SimpleDialog from "./SimpleDialog";
+import AddToCartDialog from "./AddToCartDialog";
 
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -62,7 +62,7 @@ const Products = ({ handleAddToCart }) => {
           />
         ))}
 
-      <SimpleDialog
+      <AddToCartDialog
         handleDialogClose={handleDialogClose}
         dialogState={dialog.open}
         itemName={dialog.itemName}
