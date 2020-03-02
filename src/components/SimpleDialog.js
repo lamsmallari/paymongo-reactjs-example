@@ -22,7 +22,7 @@ const SimpleDialog = ({ dialogState, handleDialogClose, itemName }) => {
           />
         </Box>
 
-        <Typography variant="h5" component="h5" align="center" gutterBottom>
+        <Typography variant="h6" component="h6" align="center" gutterBottom>
           {itemName}
         </Typography>
         <Typography

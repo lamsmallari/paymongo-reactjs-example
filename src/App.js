@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import paymongo from "./services/paymongo";
 import _ from "lodash";
+import dummyData from "./dummyData";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {
@@ -14,45 +15,6 @@ import Products from "./components/Products";
 import FooterNavigation from "./components/FooterNavigation";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
-import SimpleDialog from "./components/SimpleDialog";
-
-const predefinedCreditCardData = {
-  data: {
-    attributes: {
-      number: "4123450131000508",
-      exp_month: 12,
-      exp_year: 25,
-      cvc: "111",
-      billing: {
-        address: {
-          line1: "address",
-          city: "Biñan",
-          state: "Laguna",
-          country: "PH",
-          postal_code: "4024"
-        },
-        name: "John",
-        email: "johnmail@gmail.com",
-        phone: "09988909890"
-      }
-    }
-  }
-};
-
-const predefinedAmount = (tokenId, tokenType) => {
-  return {
-    data: {
-      attributes: {
-        amount: 10000,
-        currency: "PHP",
-        source: {
-          id: tokenId,
-          type: tokenType
-        }
-      }
-    }
-  };
-};
 
 const theme = createMuiTheme({
   palette: {
@@ -95,28 +57,6 @@ const useStyles = makeStyles(theme => ({
 function App() {
   const [index, setIndex] = useState(0);
   const [cart, setCart] = useState([]);
-  const [dialog, setDialog] = useState({ open: false, itemName: "" });
-  const [requestDialogCloseTimeOut, setRequestDialogCloseTimeOut] = useState(
-    false
-  );
-
-  useEffect(() => {
-    let dialogCloseDelay = false;
-
-    if (requestDialogCloseTimeOut) {
-      dialogCloseDelay = setTimeout(() => {
-        dialogCloseDelay = false;
-        setRequestDialogCloseTimeOut(false);
-        setDialog({ ...dialog, open: false });
-      }, 3000);
-    }
-
-    return () => {
-      if (dialogCloseDelay) {
-        clearTimeout(dialogCloseDelay);
-      }
-    };
-  }, [requestDialogCloseTimeOut, setDialog, dialog]);
 
   const handlePayment = data => {
     paymongo
@@ -126,7 +66,7 @@ function App() {
         const tokenType = result.data.type;
 
         paymongo
-          .createPayment(predefinedAmount(tokenId, tokenType))
+          .createPayment(dummyData.predefinedAmount(tokenId, tokenType))
           .then(result => console.log(result))
           .catch(error => {
             const code = error.code;
@@ -157,13 +97,6 @@ function App() {
     }
 
     setCart(cartData);
-    setDialog({ open: true, itemName: product.title });
-    setRequestDialogCloseTimeOut(true);
-  };
-
-  const handleDialogClose = () => {
-    setDialog({ ...dialog, open: false });
-    setRequestDialogCloseTimeOut(false);
   };
 
   const classes = useStyles();
@@ -172,7 +105,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <CssBaseline />
-        {/* <button onClick={() => handlePayment(predefinedCreditCardData)}>
+        {/* <button onClick={() => handlePayment(dummyData.predefinedCreditCardData)}>
         Test createToken
       </button> */}
 
@@ -190,12 +123,6 @@ function App() {
           />
         </Container>
       </div>
-
-      <SimpleDialog
-        handleDialogClose={handleDialogClose}
-        dialogState={dialog.open}
-        itemName={dialog.itemName}
-      />
     </ThemeProvider>
   );
 }
