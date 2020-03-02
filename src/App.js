@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import paymongo from "./services/paymongo";
 import _ from "lodash";
 
@@ -14,6 +14,7 @@ import Products from "./components/Products";
 import FooterNavigation from "./components/FooterNavigation";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
+import SimpleDialog from "./components/SimpleDialog";
 
 const predefinedCreditCardData = {
   data: {
@@ -58,6 +59,20 @@ const theme = createMuiTheme({
     background: {
       default: "#e3e3e3"
     }
+  },
+  typography: {
+    fontFamily: [
+      "Roboto",
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"'
+    ].join(",")
   }
 });
 
@@ -80,6 +95,28 @@ const useStyles = makeStyles(theme => ({
 function App() {
   const [index, setIndex] = useState(0);
   const [cart, setCart] = useState([]);
+  const [dialog, setDialog] = useState({ open: false, itemName: "" });
+  const [requestDialogCloseTimeOut, setRequestDialogCloseTimeOut] = useState(
+    false
+  );
+
+  useEffect(() => {
+    let dialogCloseDelay = false;
+
+    if (requestDialogCloseTimeOut) {
+      dialogCloseDelay = setTimeout(() => {
+        dialogCloseDelay = false;
+        setRequestDialogCloseTimeOut(false);
+        setDialog({ ...dialog, open: false });
+      }, 3000);
+    }
+
+    return () => {
+      if (dialogCloseDelay) {
+        clearTimeout(dialogCloseDelay);
+      }
+    };
+  }, [requestDialogCloseTimeOut, setDialog, dialog]);
 
   const handlePayment = data => {
     paymongo
@@ -114,12 +151,19 @@ function App() {
         ...product,
         quantity: cartData[existingDataIndex].quantity + 1
       };
-      setCart(cartData);
     } else {
       // 2. if product is not in the cart, perform add
       cartData.push({ ...product, quantity: 1 });
-      setCart(cartData);
     }
+
+    setCart(cartData);
+    setDialog({ open: true, itemName: product.title });
+    setRequestDialogCloseTimeOut(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialog({ ...dialog, open: false });
+    setRequestDialogCloseTimeOut(false);
   };
 
   const classes = useStyles();
@@ -134,7 +178,7 @@ function App() {
 
         <Container component="main" className={classes.main} maxWidth="sm">
           {index === 0 && <Products handleAddToCart={handleAddToCart} />}
-          {index === 1 && <Cart />}
+          {index === 1 && <Cart items={cart} />}
           {index === 2 && <Checkout />}
         </Container>
 
@@ -146,6 +190,12 @@ function App() {
           />
         </Container>
       </div>
+
+      <SimpleDialog
+        handleDialogClose={handleDialogClose}
+        dialogState={dialog.open}
+        itemName={dialog.itemName}
+      />
     </ThemeProvider>
   );
 }
