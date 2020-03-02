@@ -1,4 +1,6 @@
 import React from "react";
+import PESO from "../helpers/toPesoFormat";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -16,11 +18,11 @@ const useStyles = makeStyles({
     maxWidth: 600,
     marginBottom: 20
   },
-  media: {
-    height: 140
-  },
   actions: {
-    padding: "8px 16px"
+    padding: "0 16px 8px"
+  },
+  price: {
+    marginBottom: 12
   }
 });
 
@@ -33,6 +35,9 @@ const ProductItem = ({ data, handleAddToCart, ...rest }) => {
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {data.title}
+          </Typography>
+          <Typography className={classes.price} color="textSecondary">
+            {`${PESO(data.price)}`}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {data.details}
