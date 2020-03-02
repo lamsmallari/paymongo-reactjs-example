@@ -40,16 +40,14 @@ const dummyData = {
       id: "1",
       title: "Product Item",
       price: 5000,
-      details:
-        "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.",
+      details: "Product short description",
       image: "https://placeimg.com/640/480/tech"
     },
     {
       id: "2",
       title: "Product Item with a long name",
       price: 8000,
-      details:
-        "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.",
+      details: "Product short description",
       image: "https://placeimg.com/640/480/tech"
     }
   ]
