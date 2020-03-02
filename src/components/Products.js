@@ -7,6 +7,7 @@ const productData = [
   {
     id: "1",
     title: "Product 1",
+    price: 5000,
     details:
       "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.",
     image: "https://placeimg.com/640/480/tech"
@@ -14,6 +15,7 @@ const productData = [
   {
     id: "2",
     title: "Product 2",
+    price: 8000,
     details:
       "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.",
     image: "https://placeimg.com/640/480/tech"
