@@ -33,9 +33,9 @@ const CartItem = ({ item, handleItemQuantity }) => {
           primary={item.title}
           secondary={
             <>
-              {`Price: ${PESO(item.price)}`}
-              <br />
               {`Quantity: ${item.quantity}`}
+              <br />
+              {`Subtotal: ${PESO(item.subTotal)}`}
             </>
           }
         />

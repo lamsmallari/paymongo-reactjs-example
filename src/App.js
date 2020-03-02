@@ -49,8 +49,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2)
   },
   footer: {
-    marginTop: "auto",
-    backgroundColor: "#fff"
+    marginTop: "auto"
   }
 }));
 
@@ -123,6 +122,11 @@ function App() {
       default:
         break;
     }
+
+    const price = cartData[itemIndex].price;
+    const quantity = cartData[itemIndex].quantity;
+
+    cartData[itemIndex].subTotal = price * quantity;
 
     setCart(cartData);
   };
