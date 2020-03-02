@@ -62,7 +62,7 @@ const CartItemQuantityDrawer = ({
           >
             <div>
               <IconButton
-                onClick={() => handleCartQuantity(item.idx, "decrement")}
+                onClick={() => handleCartQuantity(item.id, "decrement")}
                 aria-label="decrement"
               >
                 <RemoveIcon />
@@ -81,7 +81,7 @@ const CartItemQuantityDrawer = ({
 
             <div>
               <IconButton
-                onClick={() => handleCartQuantity(item.idx, "increment")}
+                onClick={() => handleCartQuantity(item.id, "increment")}
                 aria-label="increment"
               >
                 <AddIcon />
@@ -96,7 +96,7 @@ const CartItemQuantityDrawer = ({
               disableElevation
               onClick={() => {
                 handleDrawerClose();
-                handRemoveFromCart(item.idx);
+                handRemoveFromCart(item.id);
               }}
               startIcon={<DeleteIcon />}
               className={classes.delete}

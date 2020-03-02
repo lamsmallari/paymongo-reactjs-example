@@ -93,24 +93,23 @@ function App() {
       cartData[existingDataIndex] = {
         ...product,
         quantity: productQuantity,
-        subTotal: subTotal,
-        idx: existingDataIndex
+        subTotal: subTotal
       };
     } else {
       // 2. if product is not in the cart, perform add
       cartData.push({
         ...product,
         quantity: 1,
-        subTotal: product.price,
-        idx: cartData.length
+        subTotal: product.price
       });
     }
 
     setCart(cartData);
   };
 
-  const handleCartQuantity = (itemIndex, operation) => {
+  const handleCartQuantity = (itemId, operation) => {
     const cartData = [...cart];
+    const itemIndex = _.findIndex(cartData, { id: itemId });
 
     switch (operation) {
       case "increment":
@@ -128,10 +127,9 @@ function App() {
     setCart(cartData);
   };
 
-  const handRemoveFromCart = itemIndex => {
-    const cartData = [...cart];
-
-    cartData.splice(itemIndex, 1);
+  const handRemoveFromCart = itemId => {
+    let cartData = [...cart];
+    cartData = _.filter(cartData, item => item.id !== itemId);
 
     setCart(cartData);
   };
