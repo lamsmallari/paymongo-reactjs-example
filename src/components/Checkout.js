@@ -72,6 +72,15 @@ const Checkout = ({
         </>
       )}
 
+      {cart.length <= 0 && !!orderCompleteData && !fakePaymentTransition && (
+        <>
+          <OrderComplete
+            data={orderCompleteData}
+            handleConfirm={handleConfirm}
+          />
+        </>
+      )}
+
       {cart.length > 0 && !orderCompleteData && !fakePaymentTransition && (
         <>
           <CheckoutForm
@@ -80,15 +89,6 @@ const Checkout = ({
             handlePayment={handlePayment}
             handleFieldChange={handleFieldChange}
             billingInfo={billingInfo}
-          />
-        </>
-      )}
-
-      {cart.length <= 0 && !!orderCompleteData && !fakePaymentTransition && (
-        <>
-          <OrderComplete
-            data={orderCompleteData}
-            handleConfirm={handleConfirm}
           />
         </>
       )}

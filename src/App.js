@@ -167,9 +167,8 @@ function App() {
         paymongo
           .createPayment(paymongoPaymentData(tokenId, tokenType))
           .then(data => {
-            console.log(data);
-            setOrderCompleteData(data);
             setCart([]);
+            setOrderCompleteData(data);
             setCartTotal(null);
           })
           .catch(error => {
