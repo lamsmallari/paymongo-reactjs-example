@@ -1,5 +1,6 @@
 {
   "name": "paymongo-test",
+  "homepage": "https://lamsmallari.github.io/paymongo-reactjs-example",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +11,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "currency.js": "^1.2.2",
+    "gh-pages": "^2.2.0",
     "lodash": "^4.17.15",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
