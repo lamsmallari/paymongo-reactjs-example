@@ -35,11 +35,11 @@ const Products = ({ handleAddToCart }) => {
     setRequestDialogCloseTimeOut(false);
   };
 
-  const useStyles = makeStyles({
+  const useStyles = makeStyles(theme => ({
     title: {
-      marginBottom: 25
+      marginBottom: theme.spacing(3)
     }
-  });
+  }));
 
   const classes = useStyles();
 
