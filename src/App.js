@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import paymongo from "./services/paymongo";
 import _ from "lodash";
 
@@ -56,6 +56,8 @@ function App() {
   const [index, setIndex] = useState(0);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState();
+  const [fakePaymentTransition, setFakePaymentTransition] = useState(false);
+  const [orderCompleteData, setOrderCompleteData] = useState(null);
 
   const [billingInfo, setBillingInfo] = useState({
     number: "4123450131000508",
@@ -71,6 +73,23 @@ function App() {
     email: "johnmail@gmail.com",
     phone: "09988909890"
   });
+
+  useEffect(() => {
+    let fakeTransition = false;
+
+    if (fakePaymentTransition) {
+      fakeTransition = setTimeout(() => {
+        fakeTransition = false;
+        setFakePaymentTransition(false);
+      }, 2000);
+    }
+
+    return () => {
+      if (fakeTransition) {
+        clearTimeout(fakeTransition);
+      }
+    };
+  }, [fakePaymentTransition]);
 
   const handlePayment = event => {
     event.preventDefault();
@@ -135,6 +154,8 @@ function App() {
       };
     };
 
+    setFakePaymentTransition(true);
+
     paymongo
       .createToken(paymongoTokenData)
       .then(result => {
@@ -143,7 +164,12 @@ function App() {
 
         paymongo
           .createPayment(paymongoPaymentData(tokenId, tokenType))
-          .then(result => console.log(result))
+          .then(data => {
+            console.log(data);
+            setOrderCompleteData(data);
+            setCart([]);
+            setCartTotal(null);
+          })
           .catch(error => {
             const code = error.code;
             const message = error.message;
@@ -227,6 +253,11 @@ function App() {
     setCart(cartData);
   };
 
+  const handleConfirm = () => {
+    setIndex(0);
+    setOrderCompleteData(null);
+  };
+
   const classes = useStyles();
 
   return (
@@ -252,6 +283,9 @@ function App() {
               handlePayment={handlePayment}
               handleFieldChange={handleFieldChange}
               billingInfo={billingInfo}
+              orderCompleteData={orderCompleteData}
+              handleConfirm={handleConfirm}
+              fakePaymentTransition={fakePaymentTransition}
             />
           )}
         </Container>
