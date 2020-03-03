@@ -25,6 +25,8 @@ const CartItem = ({ item, handleItemQuantity }) => {
           primaryTypographyProps={{ gutterBottom: true, component: "p" }}
           secondary={
             <>
+              {`Price: ${PESO(item.price)}`}
+              <br />
               {`Quantity: ${item.quantity}`}
               <br />
               {`Subtotal: ${PESO(item.subTotal)}`}

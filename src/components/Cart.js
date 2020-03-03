@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Cart = ({ items, handleCartQuantity, handRemoveFromCart, setIndex }) => {
+const Cart = ({ cart, handleCartQuantity, handRemoveFromCart, setIndex }) => {
   const [editQuantity, setEditQuantity] = useState({
     open: false,
     item: { title: "", quantity: "" }
@@ -39,7 +39,7 @@ const Cart = ({ items, handleCartQuantity, handRemoveFromCart, setIndex }) => {
     setEditQuantity({ ...editQuantity, open: false });
   };
 
-  const total = items.reduce((acc, curr) => acc + curr.subTotal, 0);
+  const total = cart.reduce((acc, curr) => acc + curr.subTotal, 0);
 
   const classes = useStyles();
 
@@ -54,9 +54,9 @@ const Cart = ({ items, handleCartQuantity, handRemoveFromCart, setIndex }) => {
         Cart
       </Typography>
 
-      {items.length > 0 && (
+      {cart.length > 0 && (
         <List component="nav" className={classes.cartList} disablePadding>
-          {items.map(item => (
+          {cart.map(item => (
             <CartItem
               key={item.id}
               item={item}
