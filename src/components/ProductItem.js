@@ -32,7 +32,7 @@ const ProductItem = ({ data, handleAddToCart, ...rest }) => {
     <>
       <Card className={classes.root}>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h6" component="h2">
             {data.title}
           </Typography>
           <Typography className={classes.price} color="textSecondary">
