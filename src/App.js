@@ -249,6 +249,9 @@ function App() {
     let cartData = [...cart];
     cartData = _.filter(cartData, item => item.id !== itemId);
 
+    const total = cartData.reduce((acc, curr) => acc + curr.subTotal, 0);
+    setCartTotal(total);
+
     setCart(cartData);
   };
 
