@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import paymongo from "./services/paymongo";
 import _ from "lodash";
-import dummyData from "./dummyData";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {
@@ -54,40 +53,96 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App() {
-  const [index, setIndex] = useState(2);
+  const [index, setIndex] = useState(0);
   const [cart, setCart] = useState([]);
+  const [cartTotal, setCartTotal] = useState();
+
   const [billingInfo, setBillingInfo] = useState({
-    data: {
-      attributes: {
-        number: "4123450131000508",
-        exp_month: 12,
-        exp_year: 25,
-        cvc: "111",
-        billing: {
-          address: {
-            line1: "address",
-            city: "Biñan",
-            state: "Laguna",
-            country: "PH",
-            postal_code: "4024"
-          },
-          name: "John",
-          email: "johnmail@gmail.com",
-          phone: "09988909890"
-        }
-      }
-    }
+    number: "4123450131000508",
+    exp_month: 12,
+    exp_year: 25,
+    cvc: "111",
+    line1: "blk 1 lot 1 address example",
+    city: "Biñan",
+    state: "Laguna",
+    country: "PH",
+    postal_code: "4024",
+    name: "John",
+    email: "johnmail@gmail.com",
+    phone: "09988909890"
   });
 
-  const handlePayment = data => {
+  const handlePayment = event => {
+    event.preventDefault();
+
+    const {
+      number,
+      exp_month,
+      exp_year,
+      cvc,
+      line1,
+      city,
+      state,
+      country,
+      postal_code,
+      name,
+      email,
+      phone
+    } = billingInfo;
+
+    const paymongoTokenData = {
+      data: {
+        attributes: {
+          number,
+          exp_month,
+          exp_year,
+          cvc,
+          billing: {
+            name,
+            email,
+            phone,
+            address: {
+              line1,
+              city,
+              state,
+              country,
+              postal_code
+            }
+          }
+        }
+      }
+    };
+
+    const amount = parseInt(
+      cartTotal
+        .toFixed(2)
+        .toString()
+        .replace(".", "")
+    );
+
+    const paymongoPaymentData = (tokenId, tokenType) => {
+      return {
+        data: {
+          attributes: {
+            amount,
+            currency: "PHP",
+            source: {
+              id: tokenId,
+              type: tokenType
+            }
+          }
+        }
+      };
+    };
+
     paymongo
-      .createToken(data)
+      .createToken(paymongoTokenData)
       .then(result => {
         const tokenId = result.data.id;
         const tokenType = result.data.type;
 
         paymongo
-          .createPayment(dummyData.predefinedAmount(tokenId, tokenType))
+          .createPayment(paymongoPaymentData(tokenId, tokenType))
           .then(result => console.log(result))
           .catch(error => {
             const code = error.code;
@@ -104,6 +159,8 @@ function App() {
 
   const handleFieldChange = event => {
     const { name, value } = event.target;
+
+    setBillingInfo({ ...billingInfo, [name]: value });
   };
 
   const handleAddToCart = product => {
@@ -128,6 +185,9 @@ function App() {
         subTotal: product.price
       });
     }
+
+    const total = cartData.reduce((acc, curr) => acc + curr.subTotal, 0);
+    setCartTotal(total);
 
     setCart(cartData);
   };
@@ -154,6 +214,9 @@ function App() {
 
     cartData[itemIndex].subTotal = price * quantity;
 
+    const total = cartData.reduce((acc, curr) => acc + curr.subTotal, 0);
+    setCartTotal(total);
+
     setCart(cartData);
   };
 
@@ -170,15 +233,13 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <CssBaseline />
-        {/* <button onClick={() => handlePayment(dummyData.predefinedCreditCardData)}>
-        Test createToken
-      </button> */}
 
         <Container component="main" className={classes.main} maxWidth="sm">
           {index === 0 && <Products handleAddToCart={handleAddToCart} />}
           {index === 1 && (
             <Cart
               cart={cart}
+              cartTotal={cartTotal}
               handleCartQuantity={handleCartQuantity}
               handRemoveFromCart={handRemoveFromCart}
               setIndex={setIndex}
@@ -187,9 +248,10 @@ function App() {
           {index === 2 && (
             <Checkout
               cart={cart}
+              cartTotal={cartTotal}
               handlePayment={handlePayment}
+              handleFieldChange={handleFieldChange}
               billingInfo={billingInfo}
-              setBillingInfo={setBillingInfo}
             />
           )}
         </Container>
