@@ -1,22 +1,31 @@
 import React, { useState } from "react";
+import PESO from "../helpers/toPesoFormat";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import CartItem from "./CartItem";
-import CartItemQuantityDrawer from "./CartItemQuantityDrawer";
+import CartItemOptionsDrawer from "./CartItemOptionsDrawer";
 
 const useStyles = makeStyles(theme => ({
   title: {
-    marginBottom: 25
+    marginBottom: theme.spacing(3)
   },
-  root: {
+  cartList: {
     width: "100%",
     maxWidth: 600,
     backgroundColor: theme.palette.background.paper
+  },
+  total: {
+    marginTop: theme.spacing(3),
+    padding: theme.spacing(2)
   }
 }));
 
-const Cart = ({ items, handleCartQuantity, handRemoveFromCart }) => {
+const Cart = ({ items, handleCartQuantity, handRemoveFromCart, setIndex }) => {
   const [editQuantity, setEditQuantity] = useState({
     open: false,
     item: { title: "", quantity: "" }
@@ -29,6 +38,8 @@ const Cart = ({ items, handleCartQuantity, handRemoveFromCart }) => {
   const handleDrawerClose = () => {
     setEditQuantity({ ...editQuantity, open: false });
   };
+
+  const total = items.reduce((acc, curr) => acc + curr.subTotal, 0);
 
   const classes = useStyles();
 
@@ -44,7 +55,7 @@ const Cart = ({ items, handleCartQuantity, handRemoveFromCart }) => {
       </Typography>
 
       {items.length > 0 && (
-        <List component="nav" className={classes.root}>
+        <List component="nav" className={classes.cartList} disablePadding>
           {items.map(item => (
             <CartItem
               key={item.id}
@@ -56,7 +67,22 @@ const Cart = ({ items, handleCartQuantity, handRemoveFromCart }) => {
         </List>
       )}
 
-      <CartItemQuantityDrawer
+      <Paper square className={classes.total}>
+        <Grid container justify="space-between">
+          <Grid item>
+            <Typography variant="h6" component="h6">
+              Total: {PESO(total)}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Button color="primary" onClick={() => setIndex(2)}>
+              Checkout
+            </Button>
+          </Grid>
+        </Grid>
+      </Paper>
+
+      <CartItemOptionsDrawer
         open={editQuantity.open}
         item={editQuantity.item}
         handleDrawerClose={handleDrawerClose}
