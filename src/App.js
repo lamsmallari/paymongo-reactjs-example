@@ -155,6 +155,7 @@ function App() {
               items={cart}
               handleCartQuantity={handleCartQuantity}
               handRemoveFromCart={handRemoveFromCart}
+              setIndex={setIndex}
             />
           )}
           {index === 2 && <Checkout />}
