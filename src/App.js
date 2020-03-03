@@ -56,7 +56,7 @@ function App() {
   const [index, setIndex] = useState(0);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState();
-  const [fakePaymentTransition, setFakePaymentTransition] = useState(false);
+  const [paymentTransitionDelay, setPaymentTransitiondDelay] = useState(false);
   const [orderCompleteData, setOrderCompleteData] = useState(null);
 
   const [billingInfo, setBillingInfo] = useState({
@@ -75,21 +75,21 @@ function App() {
   });
 
   useEffect(() => {
-    let fakeTransition = false;
+    let transition = false;
 
-    if (fakePaymentTransition) {
-      fakeTransition = setTimeout(() => {
-        fakeTransition = false;
-        setFakePaymentTransition(false);
-      }, 2000);
+    if (paymentTransitionDelay) {
+      transition = setTimeout(() => {
+        transition = false;
+        setPaymentTransitiondDelay(false);
+      }, 5000);
     }
 
     return () => {
-      if (fakeTransition) {
-        clearTimeout(fakeTransition);
+      if (transition) {
+        clearTimeout(transition);
       }
     };
-  }, [fakePaymentTransition]);
+  }, [paymentTransitionDelay]);
 
   const handlePayment = event => {
     event.preventDefault();
@@ -132,8 +132,6 @@ function App() {
       }
     };
 
-    console.log(paymongoTokenData);
-
     const amount = parseInt(
       cartTotal
         .toFixed(2)
@@ -156,7 +154,7 @@ function App() {
       };
     };
 
-    setFakePaymentTransition(true);
+    setPaymentTransitiondDelay(true);
 
     paymongo
       .createToken(paymongoTokenData)
@@ -167,8 +165,8 @@ function App() {
         paymongo
           .createPayment(paymongoPaymentData(tokenId, tokenType))
           .then(data => {
-            setCart([]);
             setOrderCompleteData(data);
+            setCart([]);
             setCartTotal(null);
           })
           .catch(error => {
@@ -188,7 +186,6 @@ function App() {
     const { name, value } = event.target;
 
     setBillingInfo({ ...billingInfo, [name]: value });
-    console.log(billingInfo);
   };
 
   const handleAddToCart = product => {
@@ -287,7 +284,7 @@ function App() {
               billingInfo={billingInfo}
               orderCompleteData={orderCompleteData}
               handleConfirm={handleConfirm}
-              fakePaymentTransition={fakePaymentTransition}
+              paymentTransitionDelay={paymentTransitionDelay}
             />
           )}
         </Container>

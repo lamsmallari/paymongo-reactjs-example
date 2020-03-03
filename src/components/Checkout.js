@@ -16,13 +16,13 @@ const Checkout = ({
   billingInfo,
   orderCompleteData,
   handleConfirm,
-  fakePaymentTransition
+  paymentTransitionDelay
 }) => {
   const useStyles = makeStyles(theme => ({
     title: {
       marginBottom: theme.spacing(3)
     },
-    fakePaymentTransition: {
+    paymentTransitionDelay: {
       paddingTop: theme.spacing(5),
       paddingBottom: theme.spacing(4),
       paddingRight: theme.spacing(2),
@@ -46,7 +46,7 @@ const Checkout = ({
         Checkout
       </Typography>
 
-      {fakePaymentTransition && (
+      {paymentTransitionDelay && (
         <>
           <Grid container justify="center">
             <Grid item>
@@ -56,7 +56,7 @@ const Checkout = ({
                 justify="center"
                 alignItems="center"
                 component={Paper}
-                className={classes.fakePaymentTransition}
+                className={classes.paymentTransitionDelay}
               >
                 <Grid item className={classes.spinner}>
                   <CircularProgress />
@@ -72,7 +72,7 @@ const Checkout = ({
         </>
       )}
 
-      {cart.length <= 0 && !!orderCompleteData && !fakePaymentTransition && (
+      {cart.length <= 0 && !!orderCompleteData && !paymentTransitionDelay && (
         <>
           <OrderComplete
             data={orderCompleteData}
@@ -81,7 +81,7 @@ const Checkout = ({
         </>
       )}
 
-      {cart.length > 0 && !orderCompleteData && !fakePaymentTransition && (
+      {cart.length > 0 && !orderCompleteData && !paymentTransitionDelay && (
         <>
           <CheckoutForm
             cart={cart}
@@ -93,7 +93,7 @@ const Checkout = ({
         </>
       )}
 
-      {cart.length <= 0 && !orderCompleteData && !fakePaymentTransition && (
+      {cart.length <= 0 && !orderCompleteData && !paymentTransitionDelay && (
         <p>Cart is empty. Please add products your cart.</p>
       )}
     </>
