@@ -54,8 +54,30 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App() {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(2);
   const [cart, setCart] = useState([]);
+  const [billingInfo, setBillingInfo] = useState({
+    data: {
+      attributes: {
+        number: "4123450131000508",
+        exp_month: 12,
+        exp_year: 25,
+        cvc: "111",
+        billing: {
+          address: {
+            line1: "address",
+            city: "Biñan",
+            state: "Laguna",
+            country: "PH",
+            postal_code: "4024"
+          },
+          name: "John",
+          email: "johnmail@gmail.com",
+          phone: "09988909890"
+        }
+      }
+    }
+  });
 
   const handlePayment = data => {
     paymongo
@@ -78,6 +100,10 @@ function App() {
         const message = error.message;
         console.log(code, message);
       });
+  };
+
+  const handleFieldChange = event => {
+    const { name, value } = event.target;
   };
 
   const handleAddToCart = product => {
@@ -152,13 +178,20 @@ function App() {
           {index === 0 && <Products handleAddToCart={handleAddToCart} />}
           {index === 1 && (
             <Cart
-              items={cart}
+              cart={cart}
               handleCartQuantity={handleCartQuantity}
               handRemoveFromCart={handRemoveFromCart}
               setIndex={setIndex}
             />
           )}
-          {index === 2 && <Checkout />}
+          {index === 2 && (
+            <Checkout
+              cart={cart}
+              handlePayment={handlePayment}
+              billingInfo={billingInfo}
+              setBillingInfo={setBillingInfo}
+            />
+          )}
         </Container>
 
         <Container component="footer" className={classes.footer} maxWidth="sm">
