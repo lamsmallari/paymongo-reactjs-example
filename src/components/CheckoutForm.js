@@ -335,7 +335,7 @@ const CheckoutForm = ({
               fullWidth
               onClick={handlePayment}
             >
-              Pay
+              Pay with PayMongo
             </Button>
           </Paper>
         </form>
