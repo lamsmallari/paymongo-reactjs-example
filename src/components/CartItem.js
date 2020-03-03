@@ -1,7 +1,6 @@
 import React from "react";
 import PESO from "../helpers/toPesoFormat";
 
-import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
@@ -13,17 +12,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 
 const CartItem = ({ item, handleItemQuantity }) => {
-  const useStyles = makeStyles(theme => ({
-    price: {
-      marginRight: 25
-    }
-  }));
-
-  const classes = useStyles();
-
   return (
     <>
-      <ListItem>
+      <ListItem divider>
         <ListItemAvatar>
           <Avatar>
             <ImageIcon />
@@ -31,6 +22,7 @@ const CartItem = ({ item, handleItemQuantity }) => {
         </ListItemAvatar>
         <ListItemText
           primary={item.title}
+          primaryTypographyProps={{ gutterBottom: true, component: "p" }}
           secondary={
             <>
               {`Quantity: ${item.quantity}`}
@@ -39,7 +31,7 @@ const CartItem = ({ item, handleItemQuantity }) => {
             </>
           }
         />
-        <Box component="div" className={classes.actions}>
+        <Box component="div">
           <IconButton
             onClick={() => handleItemQuantity(item)}
             aria-label="add to likes"
