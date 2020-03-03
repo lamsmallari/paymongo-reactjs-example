@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.js": "/paymongo-reactjs-example/static/js/main.ed2ea3ca.chunk.js",
+    "main.js.map": "/paymongo-reactjs-example/static/js/main.ed2ea3ca.chunk.js.map",
+    "runtime-main.js": "/paymongo-reactjs-example/static/js/runtime-main.75ebb1e4.js",
+    "runtime-main.js.map": "/paymongo-reactjs-example/static/js/runtime-main.75ebb1e4.js.map",
+    "static/css/2.ca48d9cd.chunk.css": "/paymongo-reactjs-example/static/css/2.ca48d9cd.chunk.css",
+    "static/js/2.d58b11f9.chunk.js": "/paymongo-reactjs-example/static/js/2.d58b11f9.chunk.js",
+    "static/js/2.d58b11f9.chunk.js.map": "/paymongo-reactjs-example/static/js/2.d58b11f9.chunk.js.map",
+    "index.html": "/paymongo-reactjs-example/index.html",
+    "precache-manifest.03ae483be999f7b81718af752431e53c.js": "/paymongo-reactjs-example/precache-manifest.03ae483be999f7b81718af752431e53c.js",
+    "service-worker.js": "/paymongo-reactjs-example/service-worker.js",
+    "static/css/2.ca48d9cd.chunk.css.map": "/paymongo-reactjs-example/static/css/2.ca48d9cd.chunk.css.map",
+    "static/js/2.d58b11f9.chunk.js.LICENSE.txt": "/paymongo-reactjs-example/static/js/2.d58b11f9.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/paymongo-reactjs-example/static/media/roboto-latin-900italic.ebf6d164.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.75ebb1e4.js",
+    "static/css/2.ca48d9cd.chunk.css",
+    "static/js/2.d58b11f9.chunk.js",
+    "static/js/main.ed2ea3ca.chunk.js"
+  ]
+}
