@@ -12,7 +12,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import CloseIcon from "@material-ui/icons/Close";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-const CartItemQuantityDrawer = ({
+const CartItemOptionsDrawer = ({
   item,
   open,
   handleDrawerClose,
@@ -119,4 +119,4 @@ const CartItemQuantityDrawer = ({
   );
 };
 
-export default CartItemQuantityDrawer;
+export default CartItemOptionsDrawer;
