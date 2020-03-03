@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import ShoppingCartRoundedIcon from "@material-ui/icons/ShoppingCartRounded";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import StorefrontRoundedIcon from "@material-ui/icons/StorefrontRounded";
 import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
 import Badge from "@material-ui/core/Badge";
@@ -40,7 +40,7 @@ const FooterNavigation = ({ onChange, index, cartCount }) => {
         label="Cart"
         icon={
           <Badge color="secondary" badgeContent={cartCount}>
-            <ShoppingCartRoundedIcon />
+            <ShoppingCartOutlinedIcon />
           </Badge>
         }
       />
