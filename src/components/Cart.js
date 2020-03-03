@@ -59,32 +59,36 @@ const Cart = ({
       </Typography>
 
       {cart.length > 0 && (
-        <List component="nav" className={classes.cartList} disablePadding>
-          {cart.map(item => (
-            <CartItem
-              key={item.id}
-              item={item}
-              open={editQuantity.open}
-              handleItemQuantity={handleItemQuantity}
-            />
-          ))}
-        </List>
+        <>
+          <List component="nav" className={classes.cartList} disablePadding>
+            {cart.map(item => (
+              <CartItem
+                key={item.id}
+                item={item}
+                open={editQuantity.open}
+                handleItemQuantity={handleItemQuantity}
+              />
+            ))}
+          </List>
+
+          <Paper square className={classes.total}>
+            <Grid container justify="space-between">
+              <Grid item>
+                <Typography variant="h6" component="h6">
+                  Total: {PESO(cartTotal)}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Button color="primary" onClick={() => setIndex(2)}>
+                  Checkout
+                </Button>
+              </Grid>
+            </Grid>
+          </Paper>
+        </>
       )}
 
-      <Paper square className={classes.total}>
-        <Grid container justify="space-between">
-          <Grid item>
-            <Typography variant="h6" component="h6">
-              Total: {PESO(cartTotal)}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Button color="primary" onClick={() => setIndex(2)}>
-              Checkout
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
+      {cart.length <= 0 && <p>Cart is empty. Please add products your cart.</p>}
 
       <CartItemOptionsDrawer
         open={editQuantity.open}
