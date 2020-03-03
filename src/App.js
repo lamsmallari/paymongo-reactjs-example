@@ -113,8 +113,8 @@ function App() {
       data: {
         attributes: {
           number,
-          exp_month,
-          exp_year,
+          exp_month: parseInt(exp_month),
+          exp_year: parseInt(exp_year),
           cvc,
           billing: {
             name,
@@ -131,6 +131,8 @@ function App() {
         }
       }
     };
+
+    console.log(paymongoTokenData);
 
     const amount = parseInt(
       cartTotal
@@ -187,6 +189,7 @@ function App() {
     const { name, value } = event.target;
 
     setBillingInfo({ ...billingInfo, [name]: value });
+    console.log(billingInfo);
   };
 
   const handleAddToCart = product => {
