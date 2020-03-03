@@ -27,9 +27,13 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import blue from "@material-ui/core/colors/blue";
 import green from "@material-ui/core/colors/green";
 
-const CheckoutForm = ({ cart, handlePayment }) => {
-  const total = cart.reduce((acc, curr) => acc + curr.subTotal, 0);
-
+const CheckoutForm = ({
+  cart,
+  cartTotal,
+  handlePayment,
+  handleFieldChange,
+  billingInfo
+}) => {
   const useStyles = makeStyles(theme => ({
     title: {
       marginBottom: theme.spacing(3)
@@ -76,12 +80,7 @@ const CheckoutForm = ({ cart, handlePayment }) => {
   return (
     <>
       {cart.length > 0 && (
-        <form
-          className={classes.form}
-          noValidate
-          autoComplete="off"
-          onSubmit={handlePayment}
-        >
+        <form className={classes.form} onSubmit={handlePayment}>
           <Paper className={classes.paper}>
             <Grid
               container
@@ -100,10 +99,12 @@ const CheckoutForm = ({ cart, handlePayment }) => {
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <TextField
-                  id="cc-number"
-                  name="cc-number"
+                  id="number"
+                  name="number"
                   fullWidth
                   label="Credit Card Number"
+                  onChange={handleFieldChange}
+                  value={billingInfo.number}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -111,24 +112,24 @@ const CheckoutForm = ({ cart, handlePayment }) => {
                   <InputLabel id="exp-month-label">Exp. Month</InputLabel>
                   <Select
                     labelId="exp-month-label"
-                    id="exp-month"
-                    name="exp-month"
-                    value="01"
+                    id="exp_month"
+                    name="exp_month"
+                    value={billingInfo.exp_month}
                     fullWidth
-                    // onChange={handleChange}
+                    onChange={handleFieldChange}
                   >
-                    <MenuItem value="01">01</MenuItem>
-                    <MenuItem value="02">02</MenuItem>
-                    <MenuItem value="03">03</MenuItem>
-                    <MenuItem value="04">04</MenuItem>
-                    <MenuItem value="05">05</MenuItem>
-                    <MenuItem value="06">06</MenuItem>
-                    <MenuItem value="07">07</MenuItem>
-                    <MenuItem value="08">08</MenuItem>
-                    <MenuItem value="09">09</MenuItem>
-                    <MenuItem value="10">10</MenuItem>
-                    <MenuItem value="11">11</MenuItem>
-                    <MenuItem value="12">12</MenuItem>
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={4}>4</MenuItem>
+                    <MenuItem value={5}>5</MenuItem>
+                    <MenuItem value={6}>6</MenuItem>
+                    <MenuItem value={7}>7</MenuItem>
+                    <MenuItem value={8}>8</MenuItem>
+                    <MenuItem value={9}>9</MenuItem>
+                    <MenuItem value={10}>10</MenuItem>
+                    <MenuItem value={11}>11</MenuItem>
+                    <MenuItem value={12}>12</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -137,11 +138,11 @@ const CheckoutForm = ({ cart, handlePayment }) => {
                   <InputLabel id="exp-year-label">Exp. Year</InputLabel>
                   <Select
                     labelId="exp-year-label"
-                    id="exp-year"
-                    name="exp-year"
-                    value="20"
+                    id="exp_year"
+                    name="exp_year"
+                    value={billingInfo.exp_year}
                     fullWidth
-                    // onChange={handleChange}
+                    onChange={handleFieldChange}
                   >
                     {expYearList().map(year => (
                       <MenuItem key={year.value} value={year.value}>
@@ -152,7 +153,14 @@ const CheckoutForm = ({ cart, handlePayment }) => {
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <TextField id="cvc" name="cvc" fullWidth label="CVC" />
+                <TextField
+                  id="cvc"
+                  name="cvc"
+                  value={billingInfo.cvc}
+                  fullWidth
+                  label="CVC"
+                  onChange={handleFieldChange}
+                />
               </Grid>
             </Grid>
           </Paper>
@@ -175,53 +183,84 @@ const CheckoutForm = ({ cart, handlePayment }) => {
 
             <Grid container spacing={1}>
               <Grid item xs={12}>
-                <TextField id="name" name="name" fullWidth label="Name" />
+                <TextField
+                  id="name"
+                  name="name"
+                  value={billingInfo.name}
+                  onChange={handleFieldChange}
+                  fullWidth
+                  label="Full Name"
+                />
               </Grid>
               <Grid item xs={6}>
                 <TextField
                   id="email"
                   name="email"
                   type="email"
+                  value={billingInfo.email}
                   fullWidth
                   label="Email"
+                  onChange={handleFieldChange}
                 />
               </Grid>
               <Grid item xs={6}>
                 <TextField
                   id="phone"
+                  value={billingInfo.phone}
                   name="phone"
                   fullWidth
                   label="Phone No."
+                  onChange={handleFieldChange}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   id="address"
-                  name="address"
+                  name="line1"
+                  value={billingInfo.line1}
                   fullWidth
                   label="Address"
+                  onChange={handleFieldChange}
                 />
               </Grid>
               <Grid item xs={6}>
-                <TextField id="city" name="city" fullWidth label="City" />
+                <TextField
+                  id="city"
+                  name="city"
+                  value={billingInfo.city}
+                  fullWidth
+                  label="City"
+                  onChange={handleFieldChange}
+                />
               </Grid>
               <Grid item xs={6}>
-                <TextField id="state" name="state" fullWidth label="State" />
+                <TextField
+                  id="state"
+                  name="state"
+                  value={billingInfo.state}
+                  fullWidth
+                  label="State"
+                  onChange={handleFieldChange}
+                />
               </Grid>
               <Grid item xs={6}>
                 <TextField
                   id="country"
                   name="country"
+                  value={billingInfo.country}
                   fullWidth
                   label="Country"
+                  onChange={handleFieldChange}
                 />
               </Grid>
               <Grid item xs={6}>
                 <TextField
                   id="postal_code"
                   name="postal_code"
+                  value={billingInfo.postal_code}
                   fullWidth
                   label="Postal Code"
+                  onChange={handleFieldChange}
                 />
               </Grid>
             </Grid>
@@ -280,7 +319,7 @@ const CheckoutForm = ({ cart, handlePayment }) => {
                       <strong>Grand Total</strong>:
                     </TableCell>
                     <TableCell align="right">
-                      <strong>{PESO(total)}</strong>
+                      <strong>{PESO(cartTotal)}</strong>
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -294,7 +333,7 @@ const CheckoutForm = ({ cart, handlePayment }) => {
               className={classes.pay}
               size="large"
               fullWidth
-              onClick={() => handlePayment()}
+              onClick={handlePayment}
             >
               Pay
             </Button>
