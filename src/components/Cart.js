@@ -25,7 +25,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Cart = ({ cart, handleCartQuantity, handRemoveFromCart, setIndex }) => {
+const Cart = ({
+  cart,
+  cartTotal,
+  handleCartQuantity,
+  handRemoveFromCart,
+  setIndex
+}) => {
   const [editQuantity, setEditQuantity] = useState({
     open: false,
     item: { title: "", quantity: "" }
@@ -38,8 +44,6 @@ const Cart = ({ cart, handleCartQuantity, handRemoveFromCart, setIndex }) => {
   const handleDrawerClose = () => {
     setEditQuantity({ ...editQuantity, open: false });
   };
-
-  const total = cart.reduce((acc, curr) => acc + curr.subTotal, 0);
 
   const classes = useStyles();
 
@@ -71,7 +75,7 @@ const Cart = ({ cart, handleCartQuantity, handRemoveFromCart, setIndex }) => {
         <Grid container justify="space-between">
           <Grid item>
             <Typography variant="h6" component="h6">
-              Total: {PESO(total)}
+              Total: {PESO(cartTotal)}
             </Typography>
           </Grid>
           <Grid item>
