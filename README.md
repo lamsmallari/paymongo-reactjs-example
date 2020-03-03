@@ -1,5 +1,8 @@
 ## Paymongo API usage example w/ React JS - Create React App
 
+**Demo**
+https://lamsmallari.github.io/paymongo-reactjs-example/
+
 **Usage**
 
 1. Clone repo
