@@ -6,17 +6,21 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import StorefrontRoundedIcon from "@material-ui/icons/StorefrontRounded";
 import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
 import Badge from "@material-ui/core/Badge";
+import cyan from "@material-ui/core/colors/cyan";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     height: 80
   },
   buttons: {
     "& svg": {
       marginBottom: 5
+    },
+    "&.Mui-selected": {
+      color: theme.palette.type === "dark" ? cyan[300] : theme.palette.primary
     }
   }
-});
+}));
 
 const FooterNavigation = ({ onChange, index, cartCount }) => {
   const classes = useStyles();
