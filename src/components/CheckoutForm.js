@@ -27,6 +27,60 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 import blue from "@material-ui/core/colors/blue";
 import green from "@material-ui/core/colors/green";
+import cyan from "@material-ui/core/colors/cyan";
+
+const useStyles = makeStyles(theme => ({
+  title: {
+    marginBottom: theme.spacing(3)
+  },
+  form: {
+    "& .MuiInput-root": {
+      marginBottom: theme.spacing(1)
+    },
+    "& .MuiFormLabel-root.Mui-focused": {
+      color: theme.palette.type === "dark" ? cyan[300] : theme.palette.primary
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor:
+        theme.palette.type === "dark" ? cyan[300] : theme.palette.primary
+    }
+  },
+  formTitle: {
+    padding: 4
+  },
+  formTitleIcon: {
+    marginRight: theme.spacing(1),
+    color: theme.palette.type === "dark" ? cyan[300] : theme.palette.primary
+  },
+  paper: {
+    padding: theme.spacing(2),
+    marginBottom: theme.spacing(2)
+  },
+  table: {
+    marginTop: theme.spacing(1)
+  },
+  grandTotal: {
+    "& td": {
+      backgroundColor: theme.palette.type === "dark" ? blue[700] : blue[50],
+      borderBottom: "none"
+    },
+    "& .MuiTableCell-root": {
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2)
+    }
+  },
+  pay: {
+    marginTop: theme.spacing(2),
+    backgroundColor: green[600],
+    "&:hover, &:focus, &:active": {
+      backgroundColor: green[900]
+    }
+  },
+  error: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
+  }
+}));
 
 const CheckoutForm = ({
   cart,
@@ -36,51 +90,6 @@ const CheckoutForm = ({
   billingInfo,
   errors
 }) => {
-  const useStyles = makeStyles(theme => ({
-    title: {
-      marginBottom: theme.spacing(3)
-    },
-    form: {
-      "& .MuiInput-root": {
-        marginBottom: theme.spacing(1)
-      }
-    },
-    formTitle: {
-      padding: 4
-    },
-    formTitleIcon: {
-      marginRight: theme.spacing(1)
-    },
-    paper: {
-      padding: theme.spacing(2),
-      marginBottom: theme.spacing(2)
-    },
-    table: {
-      marginTop: theme.spacing(1)
-    },
-    grandTotal: {
-      "& td": {
-        backgroundColor: blue[50],
-        borderBottom: "none"
-      },
-      "& .MuiTableCell-root": {
-        paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2)
-      }
-    },
-    pay: {
-      marginTop: theme.spacing(2),
-      backgroundColor: green[600],
-      "&:hover, &:focus, &:active": {
-        backgroundColor: green[900]
-      }
-    },
-    error: {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1)
-    }
-  }));
-
   const classes = useStyles();
 
   return (
@@ -99,10 +108,7 @@ const CheckoutForm = ({
               spacing={1}
               className={classes.formTitle}
             >
-              <CreditCardIcon
-                className={classes.formTitleIcon}
-                color="secondary"
-              />
+              <CreditCardIcon className={classes.formTitleIcon} />
               <Typography variant="h6" component="h6">
                 Credit Card
               </Typography>
@@ -183,10 +189,7 @@ const CheckoutForm = ({
               spacing={1}
               className={classes.formTitle}
             >
-              <AccountBoxIcon
-                className={classes.formTitleIcon}
-                color="secondary"
-              />
+              <AccountBoxIcon className={classes.formTitleIcon} />
               <Typography variant="h6" component="h6">
                 Billing Details
               </Typography>
@@ -284,10 +287,7 @@ const CheckoutForm = ({
               spacing={1}
               className={classes.formTitle}
             >
-              <ShoppingBasketIcon
-                className={classes.formTitleIcon}
-                color="secondary"
-              />
+              <ShoppingBasketIcon className={classes.formTitleIcon} />
               <Typography variant="h6" component="h6">
                 Order Review
               </Typography>
