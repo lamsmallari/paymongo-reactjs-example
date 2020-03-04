@@ -50,7 +50,8 @@ const useStyles = makeStyles(theme => ({
   },
   formTitleIcon: {
     marginRight: theme.spacing(1),
-    color: theme.palette.type === "dark" ? cyan[300] : theme.palette.primary
+    color:
+      theme.palette.type === "dark" ? cyan[300] : theme.palette.secondary.main
   },
   paper: {
     padding: theme.spacing(2),
@@ -122,6 +123,7 @@ const CheckoutForm = ({
                   label="Credit Card Number"
                   onChange={handleFieldChange}
                   value={billingInfo.number}
+                  disabled
                 />
               </Grid>
               <Grid item xs={6}>
