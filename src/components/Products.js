@@ -3,8 +3,7 @@ import dummyData from "../dummyData";
 import ProductItem from "./ProductItem";
 import AddToCartDialog from "./AddToCartDialog";
 
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 
 const Products = ({ handleAddToCart }) => {
   const [dialog, setDialog] = useState({ open: false, itemName: "" });
@@ -35,32 +34,26 @@ const Products = ({ handleAddToCart }) => {
     setRequestDialogCloseTimeOut(false);
   };
 
-  const useStyles = makeStyles(theme => ({
-    title: {
-      marginBottom: theme.spacing(3)
-    }
-  }));
-
-  const classes = useStyles();
-
   return (
     <>
-      <Typography variant="h4" component="h1" className={classes.title}>
-        Products
-      </Typography>
-
-      {!!dummyData.productDummyData &&
-        dummyData.productDummyData.map(product => (
-          <ProductItem
-            key={product.id}
-            data={product}
-            handleAddToCart={() => {
-              handleAddToCart(product);
-              setDialog({ open: true, itemName: product.title });
-              setRequestDialogCloseTimeOut(true);
-            }}
-          />
-        ))}
+      {!!dummyData.productDummyData && (
+        <>
+          <Grid container direction="column" spacing={2}>
+            {dummyData.productDummyData.map(product => (
+              <Grid item key={product.id}>
+                <ProductItem
+                  data={product}
+                  handleAddToCart={() => {
+                    handleAddToCart(product);
+                    setDialog({ open: true, itemName: product.title });
+                    setRequestDialogCloseTimeOut(true);
+                  }}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </>
+      )}
 
       <AddToCartDialog
         handleDialogClose={handleDialogClose}
