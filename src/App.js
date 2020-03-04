@@ -156,6 +156,7 @@ function App() {
     };
 
     setPaymentTransitiondDelay(true);
+    setErrors(null);
 
     paymongo
       .createToken(paymongoTokenData)
