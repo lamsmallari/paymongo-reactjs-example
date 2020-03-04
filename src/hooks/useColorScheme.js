@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const useColorScheme = () => {
-  const [colorScheme, setColorScheme] = useState("dark");
+  const [colorScheme, setColorScheme] = useState("light");
   return { colorScheme, setColorScheme };
 };
 
