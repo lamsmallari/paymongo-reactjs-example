@@ -19,6 +19,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Alert from "@material-ui/lab/Alert";
 
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
@@ -32,7 +33,8 @@ const CheckoutForm = ({
   cartTotal,
   handlePayment,
   handleFieldChange,
-  billingInfo
+  billingInfo,
+  errors
 }) => {
   const useStyles = makeStyles(theme => ({
     title: {
@@ -72,6 +74,10 @@ const CheckoutForm = ({
       "&:hover, &:focus, &:active": {
         backgroundColor: green[900]
       }
+    },
+    error: {
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1)
     }
   }));
 
@@ -82,6 +88,11 @@ const CheckoutForm = ({
       {cart.length > 0 && (
         <form className={classes.form} onSubmit={handlePayment}>
           <Paper className={classes.paper}>
+            {errors && (
+              <Alert severity="error" className={classes.error}>
+                {errors}
+              </Alert>
+            )}
             <Grid
               container
               alignItems="center"

@@ -58,6 +58,7 @@ function App() {
   const [cartTotal, setCartTotal] = useState();
   const [paymentTransitionDelay, setPaymentTransitiondDelay] = useState(false);
   const [orderCompleteData, setOrderCompleteData] = useState(null);
+  const [errors, setErrors] = useState(null);
 
   const [billingInfo, setBillingInfo] = useState({
     number: "4123450131000508",
@@ -179,6 +180,7 @@ function App() {
         const code = error.code;
         const message = error.message;
         console.log(code, message);
+        setErrors(message);
       });
   };
 
@@ -291,6 +293,7 @@ function App() {
               orderCompleteData={orderCompleteData}
               handleConfirm={handleConfirm}
               paymentTransitionDelay={paymentTransitionDelay}
+              errors={errors}
             />
           )}
         </Container>

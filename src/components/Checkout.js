@@ -16,7 +16,8 @@ const Checkout = ({
   billingInfo,
   orderCompleteData,
   handleConfirm,
-  paymentTransitionDelay
+  paymentTransitionDelay,
+  errors
 }) => {
   const useStyles = makeStyles(theme => ({
     title: {
@@ -89,6 +90,7 @@ const Checkout = ({
             handlePayment={handlePayment}
             handleFieldChange={handleFieldChange}
             billingInfo={billingInfo}
+            errors={errors}
           />
         </>
       )}
