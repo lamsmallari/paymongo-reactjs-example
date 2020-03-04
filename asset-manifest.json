@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.js": "/paymongo-reactjs-example/static/js/main.858c5c66.chunk.js",
-    "main.js.map": "/paymongo-reactjs-example/static/js/main.858c5c66.chunk.js.map",
+    "main.js": "/paymongo-reactjs-example/static/js/main.885cf744.chunk.js",
+    "main.js.map": "/paymongo-reactjs-example/static/js/main.885cf744.chunk.js.map",
     "runtime-main.js": "/paymongo-reactjs-example/static/js/runtime-main.75ebb1e4.js",
     "runtime-main.js.map": "/paymongo-reactjs-example/static/js/runtime-main.75ebb1e4.js.map",
     "static/css/2.ca48d9cd.chunk.css": "/paymongo-reactjs-example/static/css/2.ca48d9cd.chunk.css",
-    "static/js/2.d58b11f9.chunk.js": "/paymongo-reactjs-example/static/js/2.d58b11f9.chunk.js",
-    "static/js/2.d58b11f9.chunk.js.map": "/paymongo-reactjs-example/static/js/2.d58b11f9.chunk.js.map",
+    "static/js/2.904f2d67.chunk.js": "/paymongo-reactjs-example/static/js/2.904f2d67.chunk.js",
+    "static/js/2.904f2d67.chunk.js.map": "/paymongo-reactjs-example/static/js/2.904f2d67.chunk.js.map",
     "index.html": "/paymongo-reactjs-example/index.html",
-    "precache-manifest.1e702067b675f0711b573ba3fa651906.js": "/paymongo-reactjs-example/precache-manifest.1e702067b675f0711b573ba3fa651906.js",
+    "precache-manifest.46c0d442621a06defd8a45d0dff2fed8.js": "/paymongo-reactjs-example/precache-manifest.46c0d442621a06defd8a45d0dff2fed8.js",
     "service-worker.js": "/paymongo-reactjs-example/service-worker.js",
     "static/css/2.ca48d9cd.chunk.css.map": "/paymongo-reactjs-example/static/css/2.ca48d9cd.chunk.css.map",
-    "static/js/2.d58b11f9.chunk.js.LICENSE.txt": "/paymongo-reactjs-example/static/js/2.d58b11f9.chunk.js.LICENSE.txt",
+    "static/js/2.904f2d67.chunk.js.LICENSE.txt": "/paymongo-reactjs-example/static/js/2.904f2d67.chunk.js.LICENSE.txt",
     "static/media/index.css": "/paymongo-reactjs-example/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.75ebb1e4.js",
     "static/css/2.ca48d9cd.chunk.css",
-    "static/js/2.d58b11f9.chunk.js",
-    "static/js/main.858c5c66.chunk.js"
+    "static/js/2.904f2d67.chunk.js",
+    "static/js/main.885cf744.chunk.js"
   ]
 }
