@@ -59,12 +59,6 @@ function App() {
   const [paymentTransitionDelay, setPaymentTransitiondDelay] = useState(false);
   const [orderCompleteData, setOrderCompleteData] = useState(null);
 
-  console.log("--------------------------------");
-  console.log("cart", cart);
-  console.log("cartTotal", cartTotal);
-  console.log("paymentTransitionDelay", paymentTransitionDelay);
-  console.log("orderCompleteData", orderCompleteData);
-
   const [billingInfo, setBillingInfo] = useState({
     number: "4123450131000508",
     exp_month: 12,
