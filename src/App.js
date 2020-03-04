@@ -10,56 +10,43 @@ import {
 } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
+import ViewsHeader from "./components/ViewsHeader";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import FooterNavigation from "./components/FooterNavigation";
+import useColorScheme from "./hooks/useColorScheme";
+import grey from "@material-ui/core/colors/grey";
 
-const theme = createMuiTheme({
-  palette: {
-    background: {
-      default: "#e3e3e3"
+const useStyles = bgColor => {
+  const bg = bgColor ? { backgroundColor: bgColor } : {};
+
+  return makeStyles(theme => ({
+    root: {
+      ...bg,
+      display: "flex",
+      flexDirection: "column",
+      minHeight: "100vh"
+    },
+    main: {
+      marginTop: theme.spacing(4),
+      marginBottom: theme.spacing(2)
+    },
+    footer: {
+      marginTop: "auto"
     }
-  },
-  typography: {
-    fontFamily: [
-      "Roboto",
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(",")
-  }
-});
+  }));
+};
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh"
-  },
-  main: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(2)
-  },
-  footer: {
-    marginTop: "auto"
-  }
-}));
+const App = () => {
+  const { colorScheme, setColorScheme } = useColorScheme();
 
-function App() {
   const [index, setIndex] = useState(0);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState();
   const [paymentTransitionDelay, setPaymentTransitiondDelay] = useState(false);
   const [orderCompleteData, setOrderCompleteData] = useState(null);
   const [errors, setErrors] = useState(null);
-
   const [billingInfo, setBillingInfo] = useState({
     number: "4123450131000508",
     exp_month: 12,
@@ -74,6 +61,32 @@ function App() {
     email: "johnmail@gmail.com",
     phone: "09988909890"
   });
+
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: colorScheme
+        },
+        typography: {
+          fontFamily: [
+            "Roboto",
+            "-apple-system",
+            "BlinkMacSystemFont",
+            '"Segoe UI"',
+            '"Helvetica Neue"',
+            "Arial",
+            "sans-serif",
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"'
+          ].join(",")
+        }
+      }),
+    [colorScheme]
+  );
+
+  const classes = useStyles(colorScheme === "light" ? grey[300] : "")();
 
   useEffect(() => {
     let transition = false;
@@ -264,7 +277,40 @@ function App() {
     setOrderCompleteData(null);
   };
 
-  const classes = useStyles();
+  const views = [
+    {
+      title: "Products",
+      component: <Products handleAddToCart={handleAddToCart} />
+    },
+    {
+      title: "Cart",
+      component: (
+        <Cart
+          cart={cart}
+          cartTotal={cartTotal}
+          handleCartQuantity={handleCartQuantity}
+          handRemoveFromCart={handRemoveFromCart}
+          setIndex={setIndex}
+        />
+      )
+    },
+    {
+      title: "Cart",
+      component: (
+        <Checkout
+          cart={cart}
+          cartTotal={cartTotal}
+          handlePayment={handlePayment}
+          handleFieldChange={handleFieldChange}
+          billingInfo={billingInfo}
+          orderCompleteData={orderCompleteData}
+          handleConfirm={handleConfirm}
+          paymentTransitionDelay={paymentTransitionDelay}
+          errors={errors}
+        />
+      )
+    }
+  ];
 
   return (
     <ThemeProvider theme={theme}>
@@ -272,31 +318,15 @@ function App() {
         <CssBaseline />
 
         <Container component="main" className={classes.main} maxWidth="sm">
-          {index === 0 && <Products handleAddToCart={handleAddToCart} />}
-
-          {index === 1 && (
-            <Cart
-              cart={cart}
-              cartTotal={cartTotal}
-              handleCartQuantity={handleCartQuantity}
-              handRemoveFromCart={handRemoveFromCart}
-              setIndex={setIndex}
-            />
-          )}
-
-          {index === 2 && (
-            <Checkout
-              cart={cart}
-              cartTotal={cartTotal}
-              handlePayment={handlePayment}
-              handleFieldChange={handleFieldChange}
-              billingInfo={billingInfo}
-              orderCompleteData={orderCompleteData}
-              handleConfirm={handleConfirm}
-              paymentTransitionDelay={paymentTransitionDelay}
-              errors={errors}
-            />
-          )}
+          {
+            <ViewsHeader
+              colorScheme={colorScheme}
+              setColorScheme={setColorScheme}
+            >
+              {views[index].title}
+            </ViewsHeader>
+          }
+          {views[index].component}
         </Container>
 
         <Container component="footer" className={classes.footer} maxWidth="sm">
@@ -309,6 +339,6 @@ function App() {
       </div>
     </ThemeProvider>
   );
-}
+};
 
 export default App;
