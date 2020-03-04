@@ -8,6 +8,23 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import CheckoutForm from "./CheckoutForm";
 import OrderComplete from "./OrderComplete";
 
+import cyan from "@material-ui/core/colors/cyan";
+
+const useStyles = makeStyles(theme => ({
+  paymentTransitionDelay: {
+    paddingTop: theme.spacing(5),
+    paddingBottom: theme.spacing(4),
+    paddingRight: theme.spacing(2),
+    paddingLeft: theme.spacing(2)
+  },
+  spinner: {
+    marginBottom: theme.spacing(2),
+    "& .MuiCircularProgress-root": {
+      color: theme.palette.type === "dark" ? cyan[300] : theme.palette.primary
+    }
+  }
+}));
+
 const Checkout = ({
   cart,
   cartTotal,
@@ -19,34 +36,10 @@ const Checkout = ({
   paymentTransitionDelay,
   errors
 }) => {
-  const useStyles = makeStyles(theme => ({
-    title: {
-      marginBottom: theme.spacing(3)
-    },
-    paymentTransitionDelay: {
-      paddingTop: theme.spacing(5),
-      paddingBottom: theme.spacing(4),
-      paddingRight: theme.spacing(2),
-      paddingLeft: theme.spacing(2)
-    },
-    spinner: {
-      marginBottom: theme.spacing(2)
-    }
-  }));
-
   const classes = useStyles();
 
   return (
     <>
-      <Typography
-        variant="h4"
-        component="h4"
-        className={classes.title}
-        gutterBottom
-      >
-        Checkout
-      </Typography>
-
       {paymentTransitionDelay && (
         <>
           <Grid container justify="center">
