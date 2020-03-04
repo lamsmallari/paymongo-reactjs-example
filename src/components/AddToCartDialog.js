@@ -3,7 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import green from "@material-ui/core/colors/green";
 
 const AddToCartDialog = ({ dialogState, handleDialogClose, itemName }) => {
@@ -16,10 +16,7 @@ const AddToCartDialog = ({ dialogState, handleDialogClose, itemName }) => {
     >
       <DialogContent>
         <Box component="div" display="flex" justifyContent="center" mb={2}>
-          <CheckCircleOutlineOutlinedIcon
-            style={{ color: green[500] }}
-            fontSize="large"
-          />
+          <AddShoppingCartIcon style={{ color: green[500] }} fontSize="large" />
         </Box>
 
         <Typography variant="h6" component="h6" align="center" gutterBottom>
