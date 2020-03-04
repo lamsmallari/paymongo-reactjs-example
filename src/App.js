@@ -270,6 +270,7 @@ function App() {
 
         <Container component="main" className={classes.main} maxWidth="sm">
           {index === 0 && <Products handleAddToCart={handleAddToCart} />}
+
           {index === 1 && (
             <Cart
               cart={cart}
@@ -279,6 +280,7 @@ function App() {
               setIndex={setIndex}
             />
           )}
+
           {index === 2 && (
             <Checkout
               cart={cart}
