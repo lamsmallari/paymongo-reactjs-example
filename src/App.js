@@ -295,7 +295,7 @@ const App = () => {
       )
     },
     {
-      title: "Cart",
+      title: "Checkout",
       component: (
         <Checkout
           cart={cart}
