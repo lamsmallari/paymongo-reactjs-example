@@ -9,11 +9,9 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import CartItem from "./CartItem";
 import CartItemOptionsDrawer from "./CartItemOptionsDrawer";
+import cyan from "@material-ui/core/colors/cyan";
 
 const useStyles = makeStyles(theme => ({
-  title: {
-    marginBottom: theme.spacing(3)
-  },
   cartList: {
     width: "100%",
     maxWidth: 600,
@@ -22,6 +20,9 @@ const useStyles = makeStyles(theme => ({
   total: {
     marginTop: theme.spacing(3),
     padding: theme.spacing(2)
+  },
+  checkout: {
+    color: theme.palette.type === "dark" ? cyan[300] : theme.palette.primary
   }
 }));
 
@@ -49,15 +50,6 @@ const Cart = ({
 
   return (
     <>
-      <Typography
-        variant="h4"
-        component="h4"
-        gutterBottom
-        className={classes.title}
-      >
-        Cart
-      </Typography>
-
       {cart.length > 0 && (
         <>
           <List component="nav" className={classes.cartList} disablePadding>
@@ -79,7 +71,10 @@ const Cart = ({
                 </Typography>
               </Grid>
               <Grid item>
-                <Button color="primary" onClick={() => setIndex(2)}>
+                <Button
+                  className={classes.checkout}
+                  onClick={() => setIndex(2)}
+                >
                   Checkout
                 </Button>
               </Grid>
