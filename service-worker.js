@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/paymongo-reactjs-example/precache-manifest.f6adec5d00264aafd2dbe8a89ba02b10.js"
+  "/paymongo-reactjs-example/precache-manifest.1e702067b675f0711b573ba3fa651906.js"
 );
 
 self.addEventListener('message', (event) => {

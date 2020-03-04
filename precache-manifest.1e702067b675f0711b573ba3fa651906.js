@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "98c6267268cf5fb3a53ee52da75906ba",
+    "revision": "6ffd30efa9bf57f99db9f8351f131ad8",
     "url": "/paymongo-reactjs-example/index.html"
   },
   {
