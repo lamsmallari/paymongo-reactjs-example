@@ -243,6 +243,7 @@ function App() {
     setCartTotal(total);
 
     setCart(cartData);
+    setOrderCompleteData(null);
   };
 
   const handRemoveFromCart = itemId => {

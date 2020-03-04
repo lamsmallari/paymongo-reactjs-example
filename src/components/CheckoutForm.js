@@ -93,7 +93,7 @@ const CheckoutForm = ({
                 color="secondary"
               />
               <Typography variant="h6" component="h6">
-                Credit Cart
+                Credit Card
               </Typography>
             </Grid>
             <Grid container spacing={1}>
